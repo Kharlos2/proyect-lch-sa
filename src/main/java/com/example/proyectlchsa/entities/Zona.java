@@ -18,7 +18,7 @@ public class Zona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Column(name = "espacio_total", nullable = false)
     private Double espacioTotal;
     @Column(name = "espacio_parcial", nullable = false)
