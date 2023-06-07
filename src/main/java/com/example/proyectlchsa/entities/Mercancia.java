@@ -1,5 +1,6 @@
 package com.example.proyectlchsa.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,8 @@ public class Mercancia {
     private String motivoDevolucion;
     @Column(name = "volumen", nullable = false)
     private Double volumen;
-
-
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "zona", nullable = false)
+    @JsonManagedReference
+    private Zona zona;
 }
