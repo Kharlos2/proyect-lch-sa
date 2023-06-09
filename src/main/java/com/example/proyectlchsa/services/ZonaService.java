@@ -29,8 +29,9 @@ public class ZonaService implements GenerateService<Zona> {
             Optional<Zona> zona = zonaRepository.findById(idObject);
             if (zona.isPresent()) {
                 return zona.get();
+            }else {
+                throw new Exception("No se encontró el id ingresado.");
             }
-            throw new Exception("No se encontró el id ingresado.");
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -43,8 +44,9 @@ public class ZonaService implements GenerateService<Zona> {
                 throw new Exception("El espacio parcial debe ser ingresado.");
             } else if (object.getEspacioTotal() == null) {
                 throw new Exception("El espacio total debe ser ingresado.");
+            }else {
+                return zonaRepository.save(object);
             }
-            return zonaRepository.save(object);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -52,11 +54,38 @@ public class ZonaService implements GenerateService<Zona> {
 
     @Override
     public Zona updateObject(Long idObject, Zona object) throws Exception {
-        return null;
+        try {
+            Optional<Zona> zona = zonaRepository.findById(idObject);
+            if (zona.isEmpty()) {
+                throw new Exception("No se encontró el id ingresado.");
+            }else {
+                if (object.getEspacioParcial() == null) {
+                    throw new Exception("El espacio parcial debe ser ingresado.");
+                } else if (object.getEspacioTotal() == null) {
+                    throw new Exception("El espacio total debe ser ingresado.");
+                }
+                else {
+                    return zonaRepository.save(object);
+                }
+            }
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
     public boolean deleteObject(Long idObject) throws Exception {
-        return false;
+        try {
+            Optional<Zona> zona = zonaRepository.findById(idObject);
+            if (zona.isPresent()){
+                zonaRepository.deleteById(idObject);
+                return true;
+            }
+            else{
+                throw new Exception("No se encontro el objeto con ese id.");
+            }
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 }
