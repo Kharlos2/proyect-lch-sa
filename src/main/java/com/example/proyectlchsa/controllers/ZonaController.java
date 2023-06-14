@@ -3,6 +3,7 @@ package com.example.proyectlchsa.controllers;
 import com.example.proyectlchsa.dto.*;
 import com.example.proyectlchsa.entities.Zona;
 import com.example.proyectlchsa.services.ZonaService;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,18 @@ public class ZonaController {
     }
 
     public ResponseEntity<ZonaDto> saveObject(Zona zona){
+        return null;
+    }
+
+    public ResponseEntity<Update> updateObject(Zona zona) {
+        try {
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public ResponseEntity<ZonaDto> deleteObject() {
         return null;
     }
 
