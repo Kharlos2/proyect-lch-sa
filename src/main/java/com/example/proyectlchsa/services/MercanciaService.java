@@ -1,6 +1,9 @@
 package com.example.proyectlchsa.services;
 
+import com.example.proyectlchsa.dto.MercanciaCorrectaDto;
+import com.example.proyectlchsa.dto.MercanciaDto;
 import com.example.proyectlchsa.entities.Mercancia;
+import com.example.proyectlchsa.mappers.MercanciaMapper;
 import com.example.proyectlchsa.repositories.MercanciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,27 +12,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MercanciaService implements GenerateService<Mercancia> {
+public class MercanciaService implements GenerateService<MercanciaCorrectaDto,Mercancia> {
 
     @Autowired
     private MercanciaRepository mercanciaRepository;
 
+    @Autowired
+    private MercanciaMapper mercanciaMapper;
 
     @Override
-    public List<Mercancia> findAll() throws Exception {
+    public List<MercanciaCorrectaDto> findAll() throws Exception {
         try {
-            return mercanciaRepository.findAll();
+            return mercanciaMapper.mercanciasCorrectasDto(mercanciaRepository.findAll());
         } catch (Exception e) {
             throw new Exception("No se lograron traer los resgistros de Mercancía.");
         }
     }
 
     @Override
-    public Mercancia findObject(Long idObject) throws Exception {
+    public MercanciaCorrectaDto findObject(Long idObject) throws Exception {
         try{
             Optional<Mercancia> mercancia = mercanciaRepository.findById(idObject);
             if (mercancia.isPresent()){
-                return mercancia.get();
+                return mercanciaMapper.mercaciaCorrectaDto(mercancia.get());
             }else {
                 throw new Exception("No se encontró el id ingresado.");
             }
@@ -39,7 +44,7 @@ public class MercanciaService implements GenerateService<Mercancia> {
     }
 
     @Override
-    public Mercancia saveObject(Mercancia object) throws Exception {
+    public MercanciaCorrectaDto saveObject(Mercancia object) throws Exception {
         try {
             if (object.getNombre()==null){
                 throw new Exception("Debe ingresar un nombre");
@@ -57,7 +62,7 @@ public class MercanciaService implements GenerateService<Mercancia> {
                 throw new Exception("Debe ingresar el volumen");
             }
             else {
-                return mercanciaRepository.save(object);
+                return mercanciaMapper.mercaciaCorrectaDto(mercanciaRepository.save(object));
             }
         }catch (Exception e){
             throw new Exception(e.getMessage());
@@ -66,7 +71,7 @@ public class MercanciaService implements GenerateService<Mercancia> {
     }
 
     @Override
-    public Mercancia updateObject(Long idObject, Mercancia object) throws Exception {
+    public MercanciaCorrectaDto updateObject(Long idObject, Mercancia object) throws Exception {
         try {
             Optional<Mercancia> mercancia = mercanciaRepository.findById(idObject);
             if (mercancia.isEmpty()){
@@ -88,7 +93,7 @@ public class MercanciaService implements GenerateService<Mercancia> {
                     throw new Exception("Debe ingresar el volumen");
                 }
                 else {
-                    return mercanciaRepository.save(object);
+                    return mercanciaMapper.mercaciaCorrectaDto(mercanciaRepository.save(object));
                 }
             }
         }catch (Exception e){
