@@ -23,9 +23,9 @@ public class Mercancia {
     private String nombre;
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
-    @Column(name = "fechaEntradaBodega", nullable = false)
+    @Column(name = "fecha_entrada_bodega", nullable = false)
     private LocalDate fechaEntradaBodega;
-    @Column(name = "motivoDevolucion", nullable = false)
+    @Column(name = "motivo_devolucion", nullable = false)
     private String motivoDevolucion;
     @Column(name = "volumen", nullable = false)
     private Double volumen;
