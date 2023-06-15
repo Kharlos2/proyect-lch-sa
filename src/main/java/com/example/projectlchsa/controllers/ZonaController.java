@@ -2,12 +2,12 @@ package com.example.projectlchsa.controllers;
 
 import com.example.projectlchsa.dtos.zona.ZonaDTO;
 import com.example.projectlchsa.dtos.zona.ZonaErrorDTO;
+import com.example.projectlchsa.dtos.zona.ZonaRequestDTO;
 import com.example.projectlchsa.entities.ZonaEntity;
 import com.example.projectlchsa.services.ZonaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -71,10 +71,10 @@ public class ZonaController {
                     content = @Content)
     })
     @PostMapping("/")
-    public ResponseEntity<ZonaDTO> saveObject(@RequestBody ZonaEntity zona) {
-        try{
-            return ResponseEntity.status(HttpStatus.CREATED).body(service.saveObject(zona));
-        } catch (Exception e){
+    public ResponseEntity<ZonaDTO> saveObject(@RequestBody ZonaRequestDTO zonaRequestDTO) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.saveObject(zonaRequestDTO));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDTO(e.getMessage()));
         }
     }
@@ -90,9 +90,9 @@ public class ZonaController {
                     content = @Content)
     })
     @PutMapping("/{idObject}")
-    public ResponseEntity<ZonaDTO> updateObject(@RequestBody ZonaEntity zona, @PathVariable Long idObject) {
+    public ResponseEntity<ZonaDTO> updateObject(@PathVariable Long idObject, @RequestBody ZonaRequestDTO zonaRequestDTO) {
         try {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.updateObject(idObject, zona));
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.updateObject(idObject, zonaRequestDTO));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDTO(e.getMessage()));
         }
