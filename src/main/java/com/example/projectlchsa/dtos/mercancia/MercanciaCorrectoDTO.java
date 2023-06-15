@@ -1,34 +1,16 @@
-package com.example.proyectlchsa.entities;
+package com.example.projectlchsa.dtos.mercancia;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import lombok.*;
+import com.example.projectlchsa.entities.ZonaEntity;
 import java.time.LocalDate;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Entity
-@Table(name = "mercancia")
-public class MercanciaEntity {
+public class MercanciaCorrectoDTO extends MercanciaDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "iup")
     private Long iup;
-    @Column(name = "nombre", nullable = false)
     private String nombre;
-    @Column(name = "descripcion", nullable = false)
     private String descripcion;
-    @Column(name = "fecha_entrada_bodega", nullable = false)
     private LocalDate fechaEntradaBodega;
-    @Column(name = "motivo_devolucion", nullable = false)
     private String motivoDevolucion;
-    @Column(name = "volumen", nullable = false)
     private Double volumen;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "zona", nullable = false)
-    @JsonManagedReference
     private ZonaEntity zona;
 
     public Long getIup() {
@@ -79,11 +61,11 @@ public class MercanciaEntity {
         this.volumen = volumen;
     }
 
-    public ZonaEntity getZonaEntity() {
+    public ZonaEntity getZona() {
         return zona;
     }
 
-    public void setZonaEntity(ZonaEntity zona) {
+    public void setZona(ZonaEntity zona) {
         this.zona = zona;
     }
 }

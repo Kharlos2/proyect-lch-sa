@@ -1,10 +1,10 @@
-package com.example.proyectlchsa.dto.zona;
+package com.example.projectlchsa.dtos.zona;
 
-public class ZonaErrorDto extends ZonaDto{
+public class ZonaErrorDTO extends ZonaDTO {
 
     private String mensaje;
 
-    public ZonaErrorDto(String mensaje) {
+    public ZonaErrorDTO(String mensaje) {
         this.mensaje = mensaje;
     }
 

@@ -1,28 +1,13 @@
-package com.example.proyectlchsa.entities;
+package com.example.projectlchsa.dtos.zona;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-import lombok.*;
+import com.example.projectlchsa.entities.MercanciaEntity;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Entity
-@Table(name = "zona")
-public class ZonaEntity {
+public class ZonaCorrectoDTO extends ZonaDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_zona")
     private Long id;
-    @Column(name = "espacio_total", nullable = false)
     private Double espacioTotal;
-    @Column(name = "espacio_parcial", nullable = false)
     private Double espacioParcial;
-    @OneToMany(mappedBy = "zona", cascade = CascadeType.ALL)
-    @Column(name = "mercancias", nullable = false)
-    @JsonBackReference
     private List<MercanciaEntity> mercanciaEntities;
 
     public Long getId() {

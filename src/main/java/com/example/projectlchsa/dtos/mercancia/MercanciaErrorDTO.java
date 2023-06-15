@@ -1,10 +1,10 @@
-package com.example.proyectlchsa.dto.mercancia;
+package com.example.projectlchsa.dtos.mercancia;
 
-public class MercanciaErrorDto extends MercanciaDto{
+public class MercanciaErrorDTO extends MercanciaDTO {
 
     private String mensaje;
 
-    public MercanciaErrorDto(String mensaje) {
+    public MercanciaErrorDTO(String mensaje) {
         this.mensaje = mensaje;
     }
 

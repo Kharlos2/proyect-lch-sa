@@ -1,9 +1,9 @@
-package com.example.proyectlchsa.controllers;
+package com.example.projectlchsa.controllers;
 
-import com.example.proyectlchsa.dto.zona.ZonaDto;
-import com.example.proyectlchsa.dto.zona.ZonaErrorDto;
-import com.example.proyectlchsa.entities.ZonaEntity;
-import com.example.proyectlchsa.services.ZonaService;
+import com.example.projectlchsa.dtos.zona.ZonaDTO;
+import com.example.projectlchsa.dtos.zona.ZonaErrorDTO;
+import com.example.projectlchsa.entities.ZonaEntity;
+import com.example.projectlchsa.services.ZonaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ import java.util.List;
 public class ZonaController {
 
     @Autowired
-    private ZonaService zonaService;
+    private ZonaService service;
 
     @Operation(summary = "Busca todas las zonas")
     @ApiResponses(value = {
@@ -36,15 +35,16 @@ public class ZonaController {
                     content = @Content)
     })
     @GetMapping("/")
-    public ResponseEntity<List<ZonaDto>> findAll() throws Exception{
+    public ResponseEntity<List<ZonaDTO>> findAll() {
         try {
-            return ResponseEntity.ok(new ArrayList<>(zonaService.findAll()));
+            return ResponseEntity.ok(new ArrayList<>(service.findAll()));
         }catch (Exception e){
-            List<ZonaDto> mercanciaDtos = new ArrayList<>();
-            mercanciaDtos.add(new ZonaErrorDto(e.getMessage()));
+            List<ZonaDTO> mercanciaDtos = new ArrayList<>();
+            mercanciaDtos.add(new ZonaErrorDTO(e.getMessage()));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mercanciaDtos);
         }
     }
+
     @Operation(summary = "Busca una zona por id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Zona encontrada",
@@ -54,11 +54,11 @@ public class ZonaController {
                     content = @Content)
     })
     @GetMapping("/{idObject}")
-    public ResponseEntity<ZonaDto> findObject(@PathVariable Long idObject) throws Exception{
+    public ResponseEntity<ZonaDTO> findObject(@PathVariable Long idObject) {
         try {
-            return ResponseEntity.ok(zonaService.findObject(idObject));
+            return ResponseEntity.ok(service.findObject(idObject));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDto(e.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDTO(e.getMessage()));
         }
     }
 
@@ -71,13 +71,14 @@ public class ZonaController {
                     content = @Content)
     })
     @PostMapping("/")
-    public ResponseEntity<ZonaDto> saveObject(@RequestBody ZonaEntity zonaEntity) throws Exception{
+    public ResponseEntity<ZonaDTO> saveObject(@RequestBody ZonaEntity zona) {
         try{
-            return ResponseEntity.status(HttpStatus.CREATED).body(zonaService.saveObject(zonaEntity));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDto(e.getMessage()));
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.saveObject(zona));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDTO(e.getMessage()));
         }
     }
+
     @Operation(summary = "Actualiza zona por id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "202", description = "Zona actualizada correctamente",
@@ -89,11 +90,11 @@ public class ZonaController {
                     content = @Content)
     })
     @PutMapping("/{idObject}")
-    public ResponseEntity<ZonaDto> updateObject(@RequestBody ZonaEntity zonaEntity, @PathVariable Long idObject) throws Exception{
+    public ResponseEntity<ZonaDTO> updateObject(@RequestBody ZonaEntity zona, @PathVariable Long idObject) {
         try {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(zonaService.updateObject(idObject, zonaEntity));
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.updateObject(idObject, zona));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDto(e.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDTO(e.getMessage()));
         }
     }
 
@@ -106,12 +107,11 @@ public class ZonaController {
                     content = @Content)
     })
     @DeleteMapping("/{idObject}")
-    public ResponseEntity<ZonaDto> deleteObject(@PathVariable Long idObject) throws Exception {
+    public ResponseEntity<ZonaDTO> deleteObject(@PathVariable Long idObject) {
         try {
-            return ResponseEntity.ok(new ZonaErrorDto("Zona eliminada"));
+            return ResponseEntity.ok().build();
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDto(e.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDTO(e.getMessage()));
         }
     }
-
 }

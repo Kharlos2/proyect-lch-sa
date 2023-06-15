@@ -1,13 +1,13 @@
-package com.example.proyectlchsa;
+package com.example.projectlchsa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProyectLchSaApplication {
+public class ProjectLchSaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProyectLchSaApplication.class, args);
+		SpringApplication.run(ProjectLchSaApplication.class, args);
 	}
 
 }
