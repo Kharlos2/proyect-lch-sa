@@ -1,6 +1,9 @@
 package com.example.projectlchsa.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -9,9 +12,9 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "zona")
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class ZonaEntity {
 
     @Id
@@ -24,7 +27,8 @@ public class ZonaEntity {
     private Double espacioParcial;
     @OneToMany(mappedBy = "zona", cascade = CascadeType.ALL)
     @Column(name = "mercancias", nullable = false)
-    @JsonBackReference
+    @JsonManagedReference
+    @JsonIgnore
     private List<MercanciaEntity> mercanciaEntities;
 
     public Long getId() {
@@ -57,5 +61,15 @@ public class ZonaEntity {
 
     public void setMercanciaEntities(List<MercanciaEntity> mercanciaEntities) {
         this.mercanciaEntities = mercanciaEntities;
+    }
+
+    @Override
+    public String toString() {
+        return "ZonaEntity{" +
+                "id=" + id +
+                ", espacioTotal=" + espacioTotal +
+                ", espacioParcial=" + espacioParcial +
+                ", mercanciaEntities=" + mercanciaEntities +
+                '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.example.projectlchsa.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,6 @@ import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "mercancia")
 public class MercanciaEntity {
@@ -30,7 +30,7 @@ public class MercanciaEntity {
     private Double volumen;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "zona", nullable = false)
-    @JsonManagedReference
+    @JsonBackReference
     private ZonaEntity zona;
 
     public Long getIup() {
@@ -87,5 +87,18 @@ public class MercanciaEntity {
 
     public void setZona(ZonaEntity zona) {
         this.zona = zona;
+    }
+
+    @Override
+    public String toString() {
+        return "MercanciaEntity{" +
+                "iup=" + iup +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", fechaEntradaBodega=" + fechaEntradaBodega +
+                ", motivoDevolucion='" + motivoDevolucion + '\'' +
+                ", volumen=" + volumen +
+                ", zona=" + zona +
+                '}';
     }
 }
