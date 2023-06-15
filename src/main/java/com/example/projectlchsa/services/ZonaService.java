@@ -33,7 +33,7 @@ public class ZonaService implements GenerateService<ZonaCorrectoDTO, ZonaRequest
             Optional<ZonaEntity> zona = repository.findById(idObject);
             if (zona.isPresent()) {
                 return mapper.zonaCorrectaDTO(zona.get());
-            }else throw new Exception("No se encontró el id ingresado.");
+            } else throw new Exception("No se encontró el id ingresado.");
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
