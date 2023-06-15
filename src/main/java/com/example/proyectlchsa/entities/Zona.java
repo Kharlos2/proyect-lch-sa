@@ -6,8 +6,7 @@ import lombok.*;
 
 import java.util.List;
 
-@Setter
-@Getter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -27,4 +26,36 @@ public class Zona {
     @Column(name = "mercancias", nullable = false)
     @JsonBackReference
     private List<Mercancia> mercancias;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getEspacioTotal() {
+        return espacioTotal;
+    }
+
+    public void setEspacioTotal(Double espacioTotal) {
+        this.espacioTotal = espacioTotal;
+    }
+
+    public Double getEspacioParcial() {
+        return espacioParcial;
+    }
+
+    public void setEspacioParcial(Double espacioParcial) {
+        this.espacioParcial = espacioParcial;
+    }
+
+    public List<Mercancia> getMercancias() {
+        return mercancias;
+    }
+
+    public void setMercancias(List<Mercancia> mercancias) {
+        this.mercancias = mercancias;
+    }
 }
