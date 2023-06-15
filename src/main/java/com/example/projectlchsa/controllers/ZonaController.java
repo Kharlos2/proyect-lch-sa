@@ -109,6 +109,7 @@ public class ZonaController {
     @DeleteMapping("/{idObject}")
     public ResponseEntity<ZonaDTO> deleteObject(@PathVariable Long idObject) {
         try {
+            service.deleteObject(idObject);
             return ResponseEntity.ok().build();
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ZonaErrorDTO(e.getMessage()));
