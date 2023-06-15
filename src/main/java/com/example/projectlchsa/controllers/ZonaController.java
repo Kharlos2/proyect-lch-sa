@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("zonas")
+@RequestMapping("/zonas")
 @Tag(name = "Servicio zona", description = "Servicios que ofrecen CRUD en la entidad zona")
 public class ZonaController {
 
