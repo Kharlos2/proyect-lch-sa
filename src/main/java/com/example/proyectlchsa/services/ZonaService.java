@@ -1,7 +1,7 @@
 package com.example.proyectlchsa.services;
 
-import com.example.proyectlchsa.dto.ZonaCorrectaDto;
-import com.example.proyectlchsa.entities.Zona;
+import com.example.proyectlchsa.dto.zona.ZonaCorrectaDto;
+import com.example.proyectlchsa.entities.ZonaEntity;
 import com.example.proyectlchsa.mappers.ZonaMapper;
 import com.example.proyectlchsa.repositories.ZonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ZonaService implements GenerateService<ZonaCorrectaDto,Zona> {
+public class ZonaService implements GenerateService<ZonaCorrectaDto, ZonaEntity> {
 
     @Autowired
     private ZonaRepository zonaRepository;
@@ -30,7 +30,7 @@ public class ZonaService implements GenerateService<ZonaCorrectaDto,Zona> {
     @Override
     public ZonaCorrectaDto findObject(Long idObject) throws Exception {
         try {
-            Optional<Zona> zona = zonaRepository.findById(idObject);
+            Optional<ZonaEntity> zona = zonaRepository.findById(idObject);
             if (zona.isPresent()) {
                 return zonaMapper.zonaCorrectaDto(zona.get());
             }else {
@@ -42,7 +42,7 @@ public class ZonaService implements GenerateService<ZonaCorrectaDto,Zona> {
     }
 
     @Override
-    public ZonaCorrectaDto saveObject(Zona object) throws Exception {
+    public ZonaCorrectaDto saveObject(ZonaEntity object) throws Exception {
         try {
             if (object.getEspacioParcial() == null) {
                 throw new Exception("El espacio parcial debe ser ingresado.");
@@ -57,9 +57,9 @@ public class ZonaService implements GenerateService<ZonaCorrectaDto,Zona> {
     }
 
     @Override
-    public ZonaCorrectaDto updateObject(Long idObject, Zona object) throws Exception {
+    public ZonaCorrectaDto updateObject(Long idObject, ZonaEntity object) throws Exception {
         try {
-            Optional<Zona> zona = zonaRepository.findById(idObject);
+            Optional<ZonaEntity> zona = zonaRepository.findById(idObject);
             if (zona.isEmpty()) {
                 throw new Exception("No se encontró el id ingresado.");
             }else {
@@ -80,7 +80,7 @@ public class ZonaService implements GenerateService<ZonaCorrectaDto,Zona> {
     @Override
     public boolean deleteObject(Long idObject) throws Exception {
         try {
-            Optional<Zona> zona = zonaRepository.findById(idObject);
+            Optional<ZonaEntity> zona = zonaRepository.findById(idObject);
             if (zona.isPresent()){
                 zonaRepository.deleteById(idObject);
                 return true;

@@ -1,8 +1,7 @@
 package com.example.proyectlchsa.services;
 
-import com.example.proyectlchsa.dto.MercanciaCorrectaDto;
-import com.example.proyectlchsa.dto.MercanciaDto;
-import com.example.proyectlchsa.entities.Mercancia;
+import com.example.proyectlchsa.dto.mercancia.MercanciaCorrectaDto;
+import com.example.proyectlchsa.entities.MercanciaEntity;
 import com.example.proyectlchsa.mappers.MercanciaMapper;
 import com.example.proyectlchsa.repositories.MercanciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MercanciaService implements GenerateService<MercanciaCorrectaDto,Mercancia> {
+public class MercanciaService implements GenerateService<MercanciaCorrectaDto, MercanciaEntity> {
 
     @Autowired
     private MercanciaRepository mercanciaRepository;
@@ -32,7 +31,7 @@ public class MercanciaService implements GenerateService<MercanciaCorrectaDto,Me
     @Override
     public MercanciaCorrectaDto findObject(Long idObject) throws Exception {
         try{
-            Optional<Mercancia> mercancia = mercanciaRepository.findById(idObject);
+            Optional<MercanciaEntity> mercancia = mercanciaRepository.findById(idObject);
             if (mercancia.isPresent()){
                 return mercanciaMapper.mercaciaCorrectaDto(mercancia.get());
             }else {
@@ -44,7 +43,7 @@ public class MercanciaService implements GenerateService<MercanciaCorrectaDto,Me
     }
 
     @Override
-    public MercanciaCorrectaDto saveObject(Mercancia object) throws Exception {
+    public MercanciaCorrectaDto saveObject(MercanciaEntity object) throws Exception {
         try {
             if (object.getNombre()==null){
                 throw new Exception("Debe ingresar un nombre");
@@ -71,9 +70,9 @@ public class MercanciaService implements GenerateService<MercanciaCorrectaDto,Me
     }
 
     @Override
-    public MercanciaCorrectaDto updateObject(Long idObject, Mercancia object) throws Exception {
+    public MercanciaCorrectaDto updateObject(Long idObject, MercanciaEntity object) throws Exception {
         try {
-            Optional<Mercancia> mercancia = mercanciaRepository.findById(idObject);
+            Optional<MercanciaEntity> mercancia = mercanciaRepository.findById(idObject);
             if (mercancia.isEmpty()){
                 throw new Exception("No se encontró el id ingresado.");
             }else {
@@ -103,7 +102,7 @@ public class MercanciaService implements GenerateService<MercanciaCorrectaDto,Me
     @Override
     public boolean deleteObject(Long idObject) throws Exception {
         try {
-            Optional<Mercancia> mercancia = mercanciaRepository.findById(idObject);
+            Optional<MercanciaEntity> mercancia = mercanciaRepository.findById(idObject);
             if (mercancia.isPresent()){
                 mercanciaRepository.deleteById(idObject);
                 return true;

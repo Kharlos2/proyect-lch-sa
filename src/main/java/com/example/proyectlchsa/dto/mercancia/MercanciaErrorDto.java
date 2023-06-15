@@ -1,4 +1,4 @@
-package com.example.proyectlchsa.dto;
+package com.example.proyectlchsa.dto.mercancia;
 
 public class MercanciaErrorDto extends MercanciaDto{
 

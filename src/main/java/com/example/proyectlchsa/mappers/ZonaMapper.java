@@ -1,18 +1,20 @@
 package com.example.proyectlchsa.mappers;
 
 
-import com.example.proyectlchsa.dto.ZonaCorrectaDto;
-import com.example.proyectlchsa.dto.ZonaErrorDto;
-import com.example.proyectlchsa.entities.Zona;
+import com.example.proyectlchsa.dto.zona.ZonaCorrectaDto;
+import com.example.proyectlchsa.entities.ZonaEntity;
 import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
 
 import java.util.List;
 
+@Mapper(componentModel = "spring")
 public interface ZonaMapper {
 
-    ZonaCorrectaDto zonaCorrectaDto (Zona zona);
+    ZonaCorrectaDto zonaCorrectaDto(ZonaEntity zonaEntity);
 
-    List<ZonaCorrectaDto> zonasDto (List<Zona> zonas);
+    List<ZonaCorrectaDto> zonasDto(List<ZonaEntity> zonaEntities);
     @InheritInverseConfiguration
-    Zona zona (ZonaCorrectaDto zonaCorrectaDto);
+    ZonaEntity zona(ZonaCorrectaDto zonaCorrectaDto);
+    List<ZonaEntity> zonas(List<ZonaCorrectaDto> zonaCorrectaDtos);
 }

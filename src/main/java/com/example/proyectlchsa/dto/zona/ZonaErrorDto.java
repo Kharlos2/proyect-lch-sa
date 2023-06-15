@@ -1,4 +1,4 @@
-package com.example.proyectlchsa.dto;
+package com.example.proyectlchsa.dto.zona;
 
 public class ZonaErrorDto extends ZonaDto{
 

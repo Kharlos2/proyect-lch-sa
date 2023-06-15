@@ -3,16 +3,14 @@ package com.example.proyectlchsa.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.List;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Entity
 @Table(name = "zona")
-public class Zona {
+public class ZonaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +23,7 @@ public class Zona {
     @OneToMany(mappedBy = "zona", cascade = CascadeType.ALL)
     @Column(name = "mercancias", nullable = false)
     @JsonBackReference
-    private List<Mercancia> mercancias;
+    private List<MercanciaEntity> mercanciaEntities;
 
     public Long getId() {
         return id;
@@ -51,11 +49,11 @@ public class Zona {
         this.espacioParcial = espacioParcial;
     }
 
-    public List<Mercancia> getMercancias() {
-        return mercancias;
+    public List<MercanciaEntity> getMercanciaEntities() {
+        return mercanciaEntities;
     }
 
-    public void setMercancias(List<Mercancia> mercancias) {
-        this.mercancias = mercancias;
+    public void setMercanciaEntities(List<MercanciaEntity> mercanciaEntities) {
+        this.mercanciaEntities = mercanciaEntities;
     }
 }
